@@ -1,0 +1,44 @@
+{
+  "name": "astria-be",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MusicDev33/AstriaBackend.git"
+  },
+  "author": "Shelby McCowan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MusicDev33/AstriaBackend/issues"
+  },
+  "homepage": "https://github.com/MusicDev33/AstriaBackend#readme",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.3",
+    "@types/express-rate-limit": "^5.0.0",
+    "@types/helmet": "0.0.45",
+    "@types/mongoose": "^5.7.8",
+    "@types/passport": "^1.0.3",
+    "@types/passport-jwt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.9.7",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.8.3"
+  }
+}
