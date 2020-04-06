@@ -81,13 +81,11 @@ app.use(checkAgent);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));
-/*
+
 app.get(apiBase + '/', (req, res) => {
   res.status(404).send('404 Error');
 });
-*/
 
-console.log(rustAddons.hello());
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
   const httpsServer = https.createServer(credentials, app);
