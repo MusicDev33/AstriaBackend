@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST')
   credentials = {key: privateKey, cert: certificate};
 }
 
-mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
@@ -67,7 +67,7 @@ app.use(passport.session());
 // Check IQ-User-Agent
 const checkAgent = (req: Request, res: Response, next: any) => {
   if (acceptedAgents.indexOf(req.header('AS-User-Agent')) <= -1) {
-    res.sendStatus(404);
+    res.status(404).send('<h1>Nothing here, stop looking.</h1>');
   } else {
     next();
   }
@@ -81,8 +81,8 @@ app.use(checkAgent);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));
-
-app.get(apiBase + '/', (req, res) => {
+console.log(apiBase);
+app.get(apiBase, (req, res) => {
   res.status(404).send('404 Error');
 });
 
