@@ -13,9 +13,9 @@ import path from 'path';
 
 import { dbConfig } from '@config/database';
 import { port, apiBase, acceptedAgents } from './config/constants';
+import * as RoutesLib from '@config/route-defs';
 
 const rustAddons = require('../native');
-
 /*
 import { userPassportAuth } from '@config/passport';
 import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, FeedbackRoutes, SearchRoutes, UploadRoutes } from './config/routeDefs';
@@ -24,7 +24,7 @@ import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, Fe
 import { Request, Response } from 'express';
 dotenv.config();
 
-let credentials: {key: string, cert: string};
+let credentials: {key: string, cert: string} = {key: '', cert: ''};
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
   const privateKey  = fs.readFileSync('/etc/letsencrypt/live/inquantir.com/privkey.pem', 'utf8');
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST')
   credentials = {key: privateKey, cert: certificate};
 }
 
-// mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
@@ -66,18 +66,20 @@ app.use(passport.session());
 
 // Check IQ-User-Agent
 const checkAgent = (req: Request, res: Response, next: any) => {
-  if (acceptedAgents.indexOf(req.header('AS-User-Agent')) <= -1) {
-    res.status(404).send('<h1>Nothing here, stop looking.</h1>');
-  } else {
-    next();
+  const agent = req.header('AS-User-Agent') as string;
+  if (acceptedAgents.indexOf(agent) <= -1) {
+    const resText = '<h1>404 - Here\'s a cool picture of Blaziken and Lucario:<br><br>';
+    const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">'
+    res.status(404).send(resText + resImg);
   }
+  next();
 };
 
-app.use(checkAgent);
+// app.use(checkAgent);
 
 // Routes
 
-// app.use(apiBase + 'upload', UploadRoutes);
+app.use(apiBase + 'courses', RoutesLib.CourseRoutes);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));
