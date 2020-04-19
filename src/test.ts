@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import { dbConfig } from '@config/test-db';
 
 import { CourseTestDriver } from '@dbtest/course/course.driver';
+import { PersonTestDriver } from '@dbtest/person/person.driver';
 
 dotenv.config();
 
@@ -16,9 +17,13 @@ mongoose.set('useCreateIndex', true);
 mongoose.connection.on('connected', async () => {
   console.log('Database Connected: ' + dbConfig.database);
 
-  // Run Test Suite
+  // Instantiate Drivers
   const courseDriver = new CourseTestDriver();
+  const personDriver = new PersonTestDriver();
+
+  // Run Test Suite
   await courseDriver.runTests();
+  await personDriver.runTests();
 
   console.log('Testing Finished');
   process.exit(0);
