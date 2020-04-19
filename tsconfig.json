@@ -21,7 +21,8 @@
           "@interfaces/*": ["interfaces/*"],
           "@models/*": ["models/*"],
           "@utils/*": ["utils/*"],
-          "@classes/*": ["classes/*"]
+          "@classes/*": ["classes/*"],
+          "@dbtest/*": ["dbtest/*"]
         },
     },
     "include": [

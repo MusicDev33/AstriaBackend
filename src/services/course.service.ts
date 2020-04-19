@@ -16,7 +16,7 @@ class CourseService extends ModelService<ICourse> {
     return CourseService.instance;
   }
 
-  public async saveCourse(changedCourse: ICourse, changedParam: string): Promise<string> {
+  public async saveChangedCourse(changedCourse: ICourse, changedParam: string): Promise<string> {
     changedCourse.markModified(changedParam);
     try {
       const savedCourse = await changedCourse.save();
@@ -30,7 +30,7 @@ class CourseService extends ModelService<ICourse> {
     }
   }
 
-  public async findOneCourseByParameter(param: string, paramValue: string): Promise<ICourse | null> {
+  public async findOneCourseByParameter(param: string, paramValue: any): Promise<ICourse | null> {
     try {
       const query: any = {};
       query[param] = paramValue;
@@ -42,12 +42,23 @@ class CourseService extends ModelService<ICourse> {
     }
   }
 
-  public async findCoursesByParameter(param: string, paramValue: string, sort: any = {_id: 1}, limit: number = 30): Promise<ICourse[] | null> {
+  public async findCoursesByParameter(param: string, paramValue: any, sort: any = {_id: 1}, limit: number = 30): Promise<ICourse[] | null> {
     try {
       const query: any = {};
       query[param] = paramValue;
       const foundCourses = await Course.find(query).sort(sort).limit(limit).exec();
       return foundCourses;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  // Still not sure what the best way to semantically to type this is
+  public async deleteAll(): Promise<any | null> {
+    try {
+      const deletedAllCourses = await Course.deleteMany({}).exec();
+      return deletedAllCourses;
     } catch (err) {
       console.log(err);
       return null;

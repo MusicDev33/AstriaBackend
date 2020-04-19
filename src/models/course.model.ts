@@ -17,12 +17,12 @@ const CourseSchema: Schema = new Schema({
   icon: {type: String, required: true},
   iconColor: {type: String, required: true},
   iconBgColor: {type: String, required: true},
-  image: {type: String, required: true},
+  image: {type: String, required: false},
   name: {type: String, required: true},
   description: {type: String, required: true},
   instructor: {type: String, required: true},
   courseCode: {type: String, required: true},
-  tags: {type: String, required: true},
+  tags: {type: Array, required: true},
   schoolID: {type: String, required: true}
 }, {
   minimize: false
