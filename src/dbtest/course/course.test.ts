@@ -6,10 +6,9 @@ class CourseTest {
     for (const course of courses) {
       const saveResult =  await courseService.saveModel(course);
       if (saveResult) {
-        console.log(`Successfully saved course: ${saveResult.name}`);
         continue;
       }
-      console.log(`Could not save course: ${course.name}`);
+      console.log(`Test Failed: Could not save course: ${course.name}`);
     }
   }
 
@@ -17,20 +16,18 @@ class CourseTest {
     for (const paramValue of paramValues) {
       const findResult = await courseService.findCoursesByParameter(param, paramValue);
       if (findResult) {
-        console.log(`Found ${findResult.length} course(s) with a '${param}' of '${paramValue}'`);
         continue;
       }
-      console.log(`Error searching course with value: ${paramValue}`);
+      console.log(`Test Failed: Error searching course with value: ${paramValue}`);
     }
   }
 
   async cleanUp() {
     const cleanedUp = await courseService.deleteAll();
     if (cleanedUp) {
-      console.log('Successfully deleted all courses');
       return;
     }
-    console.log('Could not delete all courses');
+    console.log('Test Failed: Could not delete all courses');
   }
 }
 

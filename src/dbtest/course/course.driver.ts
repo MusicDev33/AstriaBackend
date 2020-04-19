@@ -7,15 +7,12 @@ export class CourseTestDriver {
   async runTests() {
     console.log('Courses - Save Test');
     await courseTest.testSaveCourses(courses);
-    console.log('\n');
 
     console.log('Courses - Get Course Test');
     await courseTest.testGetCourse('courseCode', ['BIOL', 'ECON', 'CHEM2320']);
-    console.log('\n');
 
     console.log('Courses - Clean Up');
     await courseTest.cleanUp();
-    console.log('\n');
     console.log('Testing Finished - Courses');
   }
 }

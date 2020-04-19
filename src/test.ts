@@ -13,14 +13,17 @@ mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-mongoose.connection.on('connected', () => {
+mongoose.connection.on('connected', async () => {
   console.log('Database Connected: ' + dbConfig.database);
+
+  // Run Test Suite
+  const courseDriver = new CourseTestDriver();
+  await courseDriver.runTests();
+
+  console.log('Testing Finished');
+  process.exit(0);
 });
 
 mongoose.connection.on('error', (err: any) => {
   console.log('Database Error: ' + err);
 });
-
-// Run Test Suite
-const courseDriver = new CourseTestDriver();
-courseDriver.runTests();
