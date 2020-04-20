@@ -8,6 +8,7 @@ export interface ICourse extends Document {
   name: string;
   description: string;
   instructor: string;
+  instructorID: string;
   courseCode: string;
   tags: string[];
   schoolID: string;

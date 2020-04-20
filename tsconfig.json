@@ -9,7 +9,7 @@
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
         "strict": true,
-        "noUnusedLocals": true,
+        "noUnusedLocals": false,
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "dist",

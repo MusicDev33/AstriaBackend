@@ -7,6 +7,8 @@ export interface IPerson extends Document {
   schoolID: string;
   // personType - Instructor, Student, etc.
   personType: string;
+  enrolledCourses: string[];
+  taughtCourses: string[];
 }
 
 const PersonSchema: Schema = new Schema({
@@ -14,7 +16,9 @@ const PersonSchema: Schema = new Schema({
   name: {type: String, required: true},
   bio: {type: String, required: true},
   schoolID: {type: String, required: true},
-  personType: {type: String, required: true}
+  personType: {type: String, required: true},
+  enrolledCourses: {type: Array, required: true},
+  taughtCourses: {type: Array, required: true}
 }, {
   minimize: false
 });
