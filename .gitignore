@@ -3,3 +3,4 @@ native/target
 native/index.node
 native/artifacts.json
 **/.DS_Store
+/logs

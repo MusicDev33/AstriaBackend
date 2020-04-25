@@ -2,6 +2,7 @@ import personService from '@services/person.service';
 import { Request, Response } from 'express';
 import { Person } from '@models/person.model';
 
+// Register person
 export const addPersonRoute = async (req: Request, res: Response) => {
   const newPerson = new Person(req.body);
 

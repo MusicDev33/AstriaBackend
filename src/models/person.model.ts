@@ -9,6 +9,8 @@ export interface IPerson extends Document {
   personType: string;
   enrolledCourses: string[];
   taughtCourses: string[];
+  email: string;
+  password: string;
 }
 
 const PersonSchema: Schema = new Schema({
@@ -18,7 +20,9 @@ const PersonSchema: Schema = new Schema({
   schoolID: {type: String, required: true},
   personType: {type: String, required: true},
   enrolledCourses: {type: Array, required: true},
-  taughtCourses: {type: Array, required: true}
+  taughtCourses: {type: Array, required: true},
+  email: {type: String, required: true},
+  password: {type: String, required: true}
 }, {
   minimize: false
 });
