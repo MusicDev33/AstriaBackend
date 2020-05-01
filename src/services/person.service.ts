@@ -1,6 +1,8 @@
 import { Person, IPerson } from '@models/person.model';
 import { ModelService } from '@classes/model.service.class';
 
+import * as bcrypt from 'bcryptjs';
+
 class PersonService extends ModelService<IPerson> {
   private static instance: PersonService;
 
@@ -30,6 +32,20 @@ class PersonService extends ModelService<IPerson> {
     }
   }
 
+  public async registerPerson(person: IPerson): Promise<IPerson | null> {
+    const salt = await bcrypt.genSalt(13);
+    const hashedPassword = await bcrypt.hash(person.password, salt);
+    person.password = hashedPassword;
+
+    try {
+      const savedModel = await person.save();
+      return savedModel;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   public async findOnePersonByParameter(param: string, paramValue: any): Promise<IPerson | null> {
     try {
       const query: any = {};
@@ -52,6 +68,10 @@ class PersonService extends ModelService<IPerson> {
       console.log(err);
       return null;
     }
+  }
+
+  public async comparePassword(userPass: string, hashedPassword: string): Promise<boolean> {
+    return await bcrypt.compare(userPass, hashedPassword);
   }
 
   // Still not sure what the best way to semantically to type this is

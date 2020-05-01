@@ -15,7 +15,7 @@ export function validateRegister(body: any): {success: boolean, msg: string} {
     return {success: false, msg: 'An error occurred on our end, sorry about that!'};
   }
 
-  if (!body.name.match(/^[a-zA-Z0-9_\-']+$/g)) {
+  if (!body.name.match(/^[a-zA-Z0-9_\- ']+$/g)) {
     LogService.log('error', `Registration: Illegal character in name: ${body.name}`);
     return {
       success: false,
@@ -23,7 +23,7 @@ export function validateRegister(body: any): {success: boolean, msg: string} {
     };
   }
 
-  if (body.email && body.email.includes('@')) {
+  if (!body.email && !body.email.includes('@')) {
     LogService.log('error', `Registration: Invalid email from client: ${body.email}`);
     return {success: false, msg: 'This is not a valid email!'};
   }

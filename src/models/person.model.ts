@@ -14,9 +14,9 @@ export interface IPerson extends Document {
 }
 
 const PersonSchema: Schema = new Schema({
-  profileURL: {type: String, required: true},
+  profileURL: {type: String, required: false},
   name: {type: String, required: true},
-  bio: {type: String, required: true},
+  bio: {type: String, required: false},
   schoolID: {type: String, required: true},
   personType: {type: String, required: true},
   enrolledCourses: {type: Array, required: true},

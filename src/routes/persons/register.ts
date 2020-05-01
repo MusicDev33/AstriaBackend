@@ -12,10 +12,10 @@ export const registerPersonRoute = async (req: Request, res: Response) => {
 
   const newPerson = new Person(req.body);
 
-  const couldSavePerson = await personService.saveModel(newPerson);
+  const couldSavePerson = await personService.registerPerson(newPerson);
 
   if (couldSavePerson) {
-    return res.json({success: true, msg: `Successfully added new user: ${newPerson.name}`});
+    return res.cookie('jwt', 'test', {httpOnly: true}).json({success: true, msg: `Successfully added new user: ${newPerson.name}`});
   }
   return res.json({sucess: false, msg: 'Could not save person'});
 };
