@@ -25,6 +25,16 @@ import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, Fe
 import { Request, Response } from 'express';
 dotenv.config();
 
+// TWILIO
+if (process.env.NODE_ENV === 'PRODUCTION') {
+  const client = require('twilio')(process.env.TWILSID, process.env.TWILAUTH);
+  client.messages.create({
+       body: 'Hey Ryan! Let me know if you got this text.',
+       from: '+12057549322',
+       to: '+12086310704'
+  }).then((message: any) => console.log(message.sid));
+}
+
 let credentials: {key: string, cert: string} = {key: '', cert: ''};
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
