@@ -24,6 +24,7 @@ import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, Fe
 
 import { Request, Response } from 'express';
 dotenv.config();
+require('dotenv-defaults/config');
 
 // TWILIO
 if (process.env.NODE_ENV === 'PRODUCTION') {
@@ -31,7 +32,7 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
   client.messages.create({
        body: 'Hey Ryan! Let me know if you got this text.',
        from: '+12057549322',
-       to: '+12086310704'
+       to: process.env.TESTPHONE
   }).then((message: any) => console.log(message.sid));
 }
 
@@ -134,9 +135,15 @@ app.get(apiBase, (req, res) => {
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
   const httpsServer = https.createServer(credentials, app);
+  httpsServer.listen(port, () => {
+    console.log('\nAstria Backend started in mode \'' + process.env.NODE_ENV + '\'');
+    console.log('TLS/HTTPS enabled.');
+    console.log('Port: ' + port);
+  });
+} else {
+  app.listen(port, () => {
+    console.log('\nAstria Backend started in mode \'' + process.env.NODE_ENV + '\'');
+    console.log('TLS/HTTPS is off.');
+    console.log('Port: ' + port);
+  });
 }
-
-app.listen(port, () => {
-  console.log('\nAstria Backend started in mode \'' + process.env.NODE_ENV + '\'');
-  console.log('Port: ' + port);
-});

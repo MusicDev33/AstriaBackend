@@ -10,6 +10,10 @@ export const registerPersonRoute = async (req: Request, res: Response) => {
     return res.json(validation);
   }
 
+  if (req.body.email === process.env.ADMINEMAIL && req.body.password === process.env.ADMINPASS) {
+    req.body.personType = 'as-admin';
+  }
+
   const newPerson = new Person(req.body);
 
   const couldSavePerson = await personService.registerPerson(newPerson);
