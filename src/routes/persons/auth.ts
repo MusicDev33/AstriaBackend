@@ -28,3 +28,7 @@ export const authRoute = async (req: Request, res: Response) => {
 
   return res.json({success: false, msg: 'Could not find user...'});
 };
+
+export const authRequest = async (req: Request, res: Response) => {
+  return res.json({success: true});
+};

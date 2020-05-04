@@ -1,24 +1,31 @@
 import { PassportStatic } from 'passport';
-import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
+import { Request } from 'express';
+import { Strategy, StrategyOptions } from 'passport-jwt';
 
-/*
-import { IUser } from '@models/user.model';
-import UserController from '@services/user.controller';
+import { IPerson } from '@models/person.model';
+import personService from '@services/person.service';
 import { dbConfig } from '@config/database';
+
+const cookieExtractor = function(req: Request) {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies['jwt'];
+  }
+  return token;
+};
 
 export const userPassportAuth = async (passport: PassportStatic) => {
   const options: StrategyOptions = {
     secretOrKey: dbConfig.secret,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt')
+    jwtFromRequest: cookieExtractor
   };
 
-  passport.use(new Strategy(options, async (jwtPayload: IUser, next: any) => {
-    const foundUserResults = await UserController.getInstance().findOneUserByParameter('_id', jwtPayload._id);
-    if (foundUserResults.success && foundUserResults.payload) {
-      return next(null, foundUserResults.payload);
+  passport.use(new Strategy(options, async (jwtPayload: IPerson, next: any) => {
+    const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+    if (foundUser) {
+      return next(null, foundUser);
     } else {
-      return next(null, false);
+      return next(null, null);
     }
   }));
 };
-*/
