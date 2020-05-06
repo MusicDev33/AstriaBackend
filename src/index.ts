@@ -18,7 +18,7 @@ import * as RoutesLib from '@config/route-defs';
 
 const rustAddons = require('../native');
 
-import { userPassportAuth } from '@config/passport';
+import { userPassportAuth, adminPassportAuth } from '@config/passport';
 /*
 import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, FeedbackRoutes, SearchRoutes, UploadRoutes } from './config/routeDefs';
 */
@@ -107,6 +107,7 @@ app.use(function(req, res, next) {
 });
 
 userPassportAuth(passport);
+adminPassportAuth(passport);
 
 // Check IQ-User-Agent
 const checkAgent = (req: Request, res: Response, next: any) => {

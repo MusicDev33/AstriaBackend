@@ -29,3 +29,19 @@ export const userPassportAuth = async (passport: PassportStatic) => {
     }
   }));
 };
+
+export const adminPassportAuth = async (passport: PassportStatic) => {
+  const options: StrategyOptions = {
+    secretOrKey: dbConfig.secret,
+    jwtFromRequest: cookieExtractor
+  };
+
+  passport.use('as-admin', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
+    const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+    if (foundUser && foundUser.personType === 'as-admin') {
+      return next(null, foundUser);
+    } else {
+      return next(null, null);
+    }
+  }));
+};

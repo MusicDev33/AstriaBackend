@@ -21,7 +21,7 @@ export const authRoute = async (req: Request, res: Response) => {
       return res.json({success: false, msg: 'Wrong password!'});
     }
 
-    delete user.password;
+    user.password = '';
     const jwtToken = jwt.sign(user.toJSON(), dbConfig.secret, {expiresIn: 28800}); // 8 hours
     return res.json({success: true, msg: 'Logged in!', user: user, jwt: jwtToken});
   }
@@ -30,5 +30,14 @@ export const authRoute = async (req: Request, res: Response) => {
 };
 
 export const authRequest = async (req: Request, res: Response) => {
-  return res.json({success: true});
+  const decodedJwt = jwt.decode(req.cookies['jwt']);
+  if (!decodedJwt) {
+    return res.json({success: false, msg: 'Something went wrong with auth request.'});
+  }
+
+  if (typeof decodedJwt !== 'string' && decodedJwt['personType'] === req.params.scope) {
+    return res.json({success: true, msg: 'Request authorized.'});
+  }
+
+  return res.json({success: false, msg: 'Something went wrong with auth request'});
 };
