@@ -54,6 +54,16 @@ class CourseService extends ModelService<ICourse> {
     }
   }
 
+  public async findCoursesByQuery(query: any, sort: any = {_id: 1}, limit: number = 30): Promise<ICourse[] | null> {
+    try {
+      const foundCourses = await Course.find(query).sort(sort).limit(limit).exec();
+      return foundCourses;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   // Still not sure what the best way to semantically to type this is
   public async deleteAll(): Promise<any | null> {
     try {

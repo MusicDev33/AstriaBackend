@@ -70,6 +70,16 @@ class PersonService extends ModelService<IPerson> {
     }
   }
 
+  public async findPersonsByQuery(query: any, sort: any = {_id: 1}, limit: number = 30): Promise<IPerson[] | null> {
+    try {
+      const foundPersons = await Person.find(query).sort(sort).limit(limit).exec();
+      return foundPersons;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   public async countDocsByParameter(param: string, paramValue: any): Promise<number | null> {
     try {
       const query: any = {};
