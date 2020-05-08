@@ -20,7 +20,7 @@ export const userPassportAuth = async (passport: PassportStatic) => {
     jwtFromRequest: cookieExtractor
   };
 
-  passport.use(new Strategy(options, async (jwtPayload: IPerson, next: any) => {
+  passport.use('jwt', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
     const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
     if (foundUser) {
       return next(null, foundUser);
@@ -45,3 +45,17 @@ export const adminPassportAuth = async (passport: PassportStatic) => {
     }
   }));
 };
+
+const adminOptions: StrategyOptions = {
+  secretOrKey: dbConfig.secret,
+  jwtFromRequest: cookieExtractor
+};
+
+export const asAdminStrategy = new Strategy(adminOptions, async (jwtPayload: IPerson, next: any) => {
+  const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+  if (foundUser && foundUser.personType === 'as-admin') {
+    return next(null, foundUser);
+  } else {
+    return next(null, null);
+  }
+})

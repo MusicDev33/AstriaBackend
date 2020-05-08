@@ -35,7 +35,7 @@ export const authRequest = async (req: Request, res: Response) => {
     return res.json({success: false, msg: 'Something went wrong with auth request.'});
   }
 
-  if (typeof decodedJwt !== 'string' && decodedJwt['personType'] === req.params.scope) {
+  if (typeof decodedJwt !== 'string' && req.body.scopes.includes(decodedJwt['personType'])) {
     return res.json({success: true, msg: 'Request authorized.'});
   }
 

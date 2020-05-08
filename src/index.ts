@@ -18,10 +18,7 @@ import * as RoutesLib from '@config/route-defs';
 
 const rustAddons = require('../native');
 
-import { userPassportAuth, adminPassportAuth } from '@config/passport';
-/*
-import { UserRoutes, QuestionRoutes, SubjectRoutes, SourceRoutes, FeedRoutes, FeedbackRoutes, SearchRoutes, UploadRoutes } from './config/routeDefs';
-*/
+import { userPassportAuth, adminPassportAuth, asAdminStrategy } from '@config/passport';
 
 import { Request, Response } from 'express';
 dotenv.config();
@@ -61,6 +58,9 @@ mongoose.connection.on('error', (err: any) => {
 // Create Express instance
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 app.use(cookieParser());
 
 app.use(helmet());
@@ -83,15 +83,10 @@ const corsOptions: cors.CorsOptions = {
 }
 app.use(cors(corsOptions));
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
 // Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Access Control
-app.use(function(req, res, next) {
+app.use( (req, res, next) => {
   const allowedOrigins = [
     'http://127.0.0.1:4000', 'http://localhost:4000', 'http://127.0.0.1:4200', 'http://localhost:4200',
     'astria.inquantir.com'
@@ -107,7 +102,11 @@ app.use(function(req, res, next) {
 });
 
 userPassportAuth(passport);
-adminPassportAuth(passport);
+// adminPassportAuth(passport);
+passport.use('as-admin', asAdminStrategy);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Check IQ-User-Agent
 const checkAgent = (req: Request, res: Response, next: any) => {
@@ -126,6 +125,7 @@ const checkAgent = (req: Request, res: Response, next: any) => {
 
 app.use(apiBase + 'courses', RoutesLib.CourseRoutes);
 app.use(apiBase + 'persons', RoutesLib.PersonRoutes);
+app.use(apiBase + 'schools', RoutesLib.SchoolRoutes);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));

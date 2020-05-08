@@ -70,6 +70,18 @@ class PersonService extends ModelService<IPerson> {
     }
   }
 
+  public async countDocsByParameter(param: string, paramValue: any): Promise<number | null> {
+    try {
+      const query: any = {};
+      query[param] = paramValue;
+      const docCount = await Person.countDocuments(query).exec();
+      return docCount;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   public async comparePassword(userPass: string, hashedPassword: string): Promise<boolean> {
     return await bcrypt.compare(userPass, hashedPassword);
   }

@@ -1,8 +1,8 @@
 import schoolService from '@services/school.service';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { School } from '@models/school.model';
 
-export const addSchoolRoute = async (req: Request, res: Response) => {
+export const addSchoolRoute = async (req: Request, res: Response, next: NextFunction) => {
   const newSchool = new School(req.body);
 
   const savedSchool = await schoolService.saveModel(newSchool);

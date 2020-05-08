@@ -5,7 +5,9 @@ import * as RouteFunctions from './route.collector';
 
 router.post('/register', RouteFunctions.registerPersonRoute);
 router.post('/auth', RouteFunctions.authRoute);
-router.get('/auth/request/:scope', passport.authenticate('jwt', {session: false}), RouteFunctions.authRequest);
+router.post('/auth/request', passport.authenticate('jwt', {session: false}), RouteFunctions.authRequest);
+
+router.post('/add', passport.authenticate('as-admin', {session: false}), RouteFunctions.addPersonRoute);
 
 const PersonRoutes = router;
 export default PersonRoutes;
