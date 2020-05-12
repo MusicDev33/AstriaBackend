@@ -19,7 +19,7 @@ export const getTeachersByParamRoute = async (req: Request, res: Response) => {
 export const getInstructorCoursesRoute = async (req: Request, res: Response) => {
   const query = {
     schoolID: req.params.schoolID,
-    profileURL: req.params.instructorID
+    instructorIDs: req.params.instructorID
   }
 
   const foundCourses = await courseService.findCoursesByQuery(query)

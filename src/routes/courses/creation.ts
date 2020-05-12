@@ -1,11 +1,22 @@
-import courseService from '@services/course.service';
 import { Request, Response } from 'express';
+import courseService from '@services/course.service';
 import { Course } from '@models/course.model';
+
+import { generateCourseID } from '@utils/courseid.generator';
 
 import { LogService } from '@logger/logger';
 
 export const addCourseRoute = async (req: Request, res: Response) => {
   const newCourse = new Course(req.body);
+
+  newCourse.courseCode = generateCourseID(newCourse.name);
+
+  const query = {$or: [ {'courseCode': newCourse.courseCode}, {'name': newCourse.name} ]}
+  const courseExists = await courseService.findCoursesByQuery(query);
+
+  if (courseExists && courseExists.length) {
+    return res.json({success: false, msg: 'Course already exists!'});
+  }
 
   const savedCourse = await courseService.saveModel(newCourse);
   if (savedCourse) {
