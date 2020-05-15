@@ -23,7 +23,9 @@ export const authRoute = async (req: Request, res: Response) => {
     }
 
     user.password = '';
-    const jwtToken = jwt.sign(user.toJSON(), dbConfig.secret, {expiresIn: 28800}); // 8 hours
+    // 5 years
+    const time = 5 * 365 * 86400;
+    const jwtToken = jwt.sign(user.toJSON(), dbConfig.secret, {expiresIn: time}); // 5 years
     return res.json({success: true, msg: 'Logged in!', user: user, jwt: jwtToken});
   }
 

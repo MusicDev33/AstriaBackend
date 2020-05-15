@@ -7,6 +7,7 @@ export interface ICourse extends Document {
   image: string;
   name: string;
   description: string;
+  introText: string;
   instructors: string[];
   instructorIDs: string[];
   courseCode: string;
@@ -21,6 +22,7 @@ const CourseSchema: Schema = new Schema({
   image: {type: String, required: false},
   name: {type: String, required: true},
   description: {type: String, required: true},
+  introText: {type: String, required: true},
   instructors: {type: Array, required: true},
   instructorIDs: {type: Array, required: true},
   courseCode: {type: String, required: false},
