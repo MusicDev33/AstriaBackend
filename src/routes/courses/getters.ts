@@ -5,9 +5,8 @@ export const getCoursesByParamRoute = async (req: Request, res: Response) => {
   const foundCourses = await courseService.findCoursesByParameter(req.params.param, req.params.value)
   if (foundCourses) {
     return res.json({success: true, msg: 'Successfully found courses', courses: foundCourses});
-  } else {
-    return res.json({success: false, msg: 'Could not find courses...'});
   }
+  return res.json({success: false, msg: 'Could not find courses...'});
 };
 
 export const getCourseForInstructorRoute = async (req: Request, res: Response) => {
@@ -21,7 +20,6 @@ export const getCourseForInstructorRoute = async (req: Request, res: Response) =
 
   if (foundCourse) {
     return res.json({success: true, msg: 'Successfully found courses', course: foundCourse});
-  } else {
-    return res.json({success: false, msg: 'Could not find courses...'});
   }
+  return res.json({success: false, msg: 'Could not find courses...'});
 };
