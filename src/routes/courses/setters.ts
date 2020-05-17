@@ -14,14 +14,16 @@ export const setCourseParamRoute = async (req: Request, res: Response) => {
     return res.json({success: false, msg: 'Could not find courses...'});
   }
 
-  if (foundCourse[req.params.courseParam]) {
-    foundCourse[req.params.courseParam] = req.body.paramValue;
-    const savedCourse = await courseService.saveChangedCourse(foundCourse, req.params.courseParam);
+  console.log(foundCourse)
+  console.log(req.params.courseParam)
+  console.log(foundCourse[req.params.courseParam])
 
-    if (savedCourse) {
-      return res.json({success: true, msg: 'Successfully saved course!'})
-    }
+  foundCourse[req.params.courseParam] = req.body.paramValue;
+  const savedCourse = await courseService.saveChangedCourse(foundCourse, req.params.courseParam);
+
+  if (savedCourse) {
+    return res.json({success: true, msg: 'Successfully saved course!'})
   }
 
-  return res.status(500).json({success: false, msg: '500 Error - Something happened on Meteor\'s end...'});
+  return res.json({success: false, msg: '500 Error - Something happened on Meteor\'s end...'});
 }

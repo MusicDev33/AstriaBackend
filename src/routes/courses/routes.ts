@@ -6,7 +6,7 @@ import * as RouteFunctions from './route.collector';
 router.get('/', RouteFunctions.testRoute);
 router.get('/course/:schoolID/:instructorID/:courseCode', RouteFunctions.getCourseForInstructorRoute);
 router.post('/add', RouteFunctions.addCourseRoute);
-router.post('/course/:schoolID/:instructorID/:courseCode/:courseParam', RouteFunctions.getCourseForInstructorRoute);
+router.post('/course/:schoolID/:instructorID/:courseCode/:courseParam', RouteFunctions.setCourseParamRoute);
 
 const CourseRoutes = router;
 export default CourseRoutes;

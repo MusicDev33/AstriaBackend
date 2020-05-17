@@ -22,7 +22,7 @@ const CourseSchema: Schema = new Schema({
   image: {type: String, required: false},
   name: {type: String, required: true},
   description: {type: String, required: true},
-  introText: {type: String, required: true},
+  introText: {type: String, required: false},
   instructors: {type: Array, required: true},
   instructorIDs: {type: Array, required: true},
   courseCode: {type: String, required: false},
