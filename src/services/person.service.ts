@@ -7,7 +7,7 @@ class PersonService extends ModelService<IPerson> {
   private static instance: PersonService;
 
   private constructor() {
-    super();
+    super(Person);
   }
 
   public static getInstance(): PersonService {

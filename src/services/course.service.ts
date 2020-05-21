@@ -5,7 +5,7 @@ class CourseService extends ModelService<ICourse> {
   private static instance: CourseService;
 
   private constructor() {
-    super();
+    super(Course);
   }
 
   public static getInstance(): CourseService {
