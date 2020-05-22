@@ -9,7 +9,7 @@ export const getTeachersByParamRoute = async (req: Request, res: Response) => {
     return res.json({success: false, msg: 'Param \'password\' does not exist!'});
   }
 
-  const foundPeople = await personService.findPersonsByParameter(req.params.param, req.params.value)
+  const foundPeople = await personService.findModelsByParameter(req.params.param, req.params.value);
   if (foundPeople) {
     return res.json({success: true, msg: 'Successfully found people', people: foundPeople});
   }
@@ -22,7 +22,7 @@ export const getInstructorCoursesRoute = async (req: Request, res: Response) => 
     instructorIDs: req.params.instructorID
   }
 
-  const foundCourses = await courseService.findCoursesByQuery(query)
+  const foundCourses = await courseService.findModelsByQuery(query);
   if (foundCourses) {
     return res.json({success: true, msg: 'Successfully found courses', courses: foundCourses});
   }

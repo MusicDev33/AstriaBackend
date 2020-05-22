@@ -12,7 +12,7 @@ export const addCourseRoute = async (req: Request, res: Response) => {
   newCourse.courseCode = generateCourseID(newCourse.name);
 
   const query = {$or: [ {'courseCode': newCourse.courseCode}, {'name': newCourse.name} ]}
-  const courseExists = await courseService.findCoursesByQuery(query);
+  const courseExists = await courseService.findModelsByQuery(query);
 
   if (courseExists && courseExists.length) {
     return res.json({success: false, msg: 'Course already exists!'});

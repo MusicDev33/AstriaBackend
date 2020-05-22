@@ -18,7 +18,7 @@ export const getSchoolInstructorsRoute = async (req: Request, res: Response) => 
     personType: 'instructor',
     schoolID: req.params.schoolID
   }
-  const schoolInstructors = await personService.findPersonsByQuery(query);
+  const schoolInstructors = await personService.findModelsByQuery(query);
 
   if (schoolInstructors) {
     return res.json({success: true, msg: 'Found instructors!', instructors: schoolInstructors})
@@ -32,7 +32,7 @@ export const getInstructorCoursesRoute = async (req: Request, res: Response) => 
     instructorID: req.params.profileURL
   };
 
-  const foundCourses = await courseService.findCoursesByQuery(query)
+  const foundCourses = await courseService.findModelsByQuery(query);
   if (foundCourses) {
     return res.json({success: true, msg: 'Successfully found courses', courses: foundCourses});
   } else {

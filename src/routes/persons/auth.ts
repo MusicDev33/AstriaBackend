@@ -13,7 +13,7 @@ export const authRoute = async (req: Request, res: Response) => {
     return res.json(validation);
   }
 
-  let user = await personService.findOnePersonByParameter('email', req.body.email.toLowerCase());
+  let user = await personService.findOneModelByParameter('email', req.body.email.toLowerCase());
 
   if (user) {
     // const passwordMatched = personService.comparePassword(req.body.email, user.email);

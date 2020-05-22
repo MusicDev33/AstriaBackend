@@ -19,7 +19,7 @@ export class ModelService<P extends Document> {
     }
   }
 
-  public async saveChangedCourse(changedModel: P, changedParam: string): Promise<string> {
+  public async saveChangedModel(changedModel: P, changedParam: string): Promise<string> {
     changedModel.markModified(changedParam);
 
     try {

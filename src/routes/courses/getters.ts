@@ -2,7 +2,7 @@ import courseService from '@services/course.service';
 import { Request, Response } from 'express';
 
 export const getCoursesByParamRoute = async (req: Request, res: Response) => {
-  const foundCourses = await courseService.findCoursesByParameter(req.params.param, req.params.value)
+  const foundCourses = await courseService.findModelsByParameter(req.params.param, req.params.value)
   if (foundCourses) {
     return res.json({success: true, msg: 'Successfully found courses', courses: foundCourses});
   }
@@ -16,7 +16,7 @@ export const getCourseForInstructorRoute = async (req: Request, res: Response) =
     instructorIDs: req.params.instructorID
   }
 
-  const foundCourse = await courseService.findOneCourseByQuery(query);
+  const foundCourse = await courseService.findOneModelByQuery(query);
 
   if (foundCourse) {
     return res.json({success: true, msg: 'Successfully found courses', course: foundCourse});

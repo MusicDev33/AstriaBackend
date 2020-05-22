@@ -8,7 +8,7 @@ export const setCourseParamRoute = async (req: Request, res: Response) => {
     instructorIDs: req.params.instructorID
   }
 
-  const foundCourse: any = await courseService.findOneCourseByQuery(query);
+  const foundCourse: any = await courseService.findOneModelByQuery(query);
 
   if (!foundCourse) {
     return res.json({success: false, msg: 'Could not find courses...'});
@@ -19,7 +19,7 @@ export const setCourseParamRoute = async (req: Request, res: Response) => {
   console.log(foundCourse[req.params.courseParam])
 
   foundCourse[req.params.courseParam] = req.body.paramValue;
-  const savedCourse = await courseService.saveChangedCourse(foundCourse, req.params.courseParam);
+  const savedCourse = await courseService.saveChangedModel(foundCourse, req.params.courseParam);
 
   if (savedCourse) {
     return res.json({success: true, msg: 'Successfully saved course!'})
