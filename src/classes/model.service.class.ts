@@ -88,6 +88,23 @@ export class ModelService<P extends Document> {
     }
   }
 
+  public async removeOneModelByParameter(param: string, paramValue: any): Promise<P | null> {
+    if (this.bannedParams.includes(param)) {
+      console.log(`Parameter '${param}' is banned!`);
+      return null;
+    }
+    
+    const query: any = {};
+    query[param] = paramValue;
+    try {
+      const removedModel = await this.HelperClass.findOneAndDelete(query).exec();
+      return removedModel;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   public async deleteAll(): Promise<any | null> {
     try {
       const deletedAllModels = await this.HelperClass.deleteMany({}).exec();

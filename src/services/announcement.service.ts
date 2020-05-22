@@ -4,6 +4,8 @@ import { ModelService } from '@classes/model.service.class';
 class AnnouncementService extends ModelService<IAnnouncement> {
   private static instance: AnnouncementService;
 
+  bannedParams = ['header', 'description'];
+
   private constructor() {
     super(Announcement);
   }
