@@ -16,7 +16,7 @@ import { dbConfig } from '@config/database';
 import { port, apiBase, acceptedAgents } from './config/constants';
 import * as RoutesLib from '@config/route-defs';
 
-const rustAddons = require('../native');
+// const rustAddons = require('../native');
 
 import { userPassportAuth, adminPassportAuth, asAdminStrategy } from '@config/passport';
 
