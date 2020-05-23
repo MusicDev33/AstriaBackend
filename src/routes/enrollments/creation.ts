@@ -1,10 +1,7 @@
-import { Request, Response } from 'express';
-
+import { Request, Response, NextFunction } from 'express';
 import enrollmentService from '@services/enrollment.service';
-
 import { Enrollment } from '@models/enrollment.model';
 
-// This got moved to enrollments/creation.ts
 export const enrollStudentRoute = async (req: Request, res: Response) => {
   const newEnrollment = new Enrollment({
     studentID: req.params.studentID,
