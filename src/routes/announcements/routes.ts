@@ -9,7 +9,7 @@ router.post('/create', passport.authenticate('jwt', {session: false}), RouteFunc
 router.post('/onert/read', passport.authenticate('jwt', {session: false}), RouteFunctions.readOneAnnouncementRoute);
 router.post('/rts/read', passport.authenticate('jwt', {session: false}), RouteFunctions.readAnnouncementsRoute);
 
-router.delete(':id', passport.authenticate('jwt', {session: false}), RouteFunctions.deleteAnnouncementRoute);
+router.delete('/:id', passport.authenticate('jwt', {session: false}), RouteFunctions.deleteAnnouncementRoute);
 
 const AnnouncementRoutes = router;
 export default AnnouncementRoutes;
