@@ -5,6 +5,7 @@ export interface IAnnouncement extends Document {
   description: string;
   courseID: string;
   author: string;
+  authorID: string;
   time: Date;
 }
 
@@ -13,6 +14,7 @@ const AnnouncementSchema: Schema = new Schema({
   description: {type: String, required: true},
   courseID: {type: String, required: true},
   author: {type: String, required: true},
+  authorID: {type: String, required: true},
   time: {type: Date, required: true}
 }, {
   minimize: false

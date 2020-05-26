@@ -126,6 +126,7 @@ const checkAgent = (req: Request, res: Response, next: any) => {
 app.use(apiBase + 'courses', RoutesLib.CourseRoutes);
 app.use(apiBase + 'persons', RoutesLib.PersonRoutes);
 app.use(apiBase + 'schools', RoutesLib.SchoolRoutes);
+app.use(apiBase + 'announcements', RoutesLib.AnnouncementRoutes);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));

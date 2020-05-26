@@ -21,7 +21,7 @@ export const userPassportAuth = async (passport: PassportStatic) => {
   };
 
   passport.use('jwt', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
-    const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+    const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
     if (foundUser) {
       return next(null, foundUser);
     } else {
@@ -37,7 +37,7 @@ export const adminPassportAuth = async (passport: PassportStatic) => {
   };
 
   passport.use('as-admin', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
-    const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+    const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
     if (foundUser && foundUser.personType === 'as-admin') {
       return next(null, foundUser);
     } else {
@@ -52,7 +52,7 @@ const adminOptions: StrategyOptions = {
 };
 
 export const asAdminStrategy = new Strategy(adminOptions, async (jwtPayload: IPerson, next: any) => {
-  const foundUser = await personService.findOnePersonByParameter('_id', jwtPayload._id);
+  const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
   if (foundUser && foundUser.personType === 'as-admin') {
     return next(null, foundUser);
   } else {

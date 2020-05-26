@@ -6,6 +6,7 @@ import * as RouteFunctions from './route.collector';
 router.get('/param/:param/:value', passport.authenticate('jwt', {session: false}), RouteFunctions.getAnnouncementsByParameterRoute);
 
 router.post('/create', passport.authenticate('jwt', {session: false}), RouteFunctions.createAnnouncementRoute);
+// RT = ReadTracker
 router.post('/onert/read', passport.authenticate('jwt', {session: false}), RouteFunctions.readOneAnnouncementRoute);
 router.post('/rts/read', passport.authenticate('jwt', {session: false}), RouteFunctions.readAnnouncementsRoute);
 

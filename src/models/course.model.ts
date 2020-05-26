@@ -13,6 +13,8 @@ export interface ICourse extends Document {
   courseCode: string;
   tags: string[];
   schoolID: string;
+  // Is the course active or has it already ended?
+  active: boolean;
 }
 
 const CourseSchema: Schema = new Schema({
@@ -27,7 +29,8 @@ const CourseSchema: Schema = new Schema({
   instructorIDs: {type: Array, required: true},
   courseCode: {type: String, required: false},
   tags: {type: Array, required: true},
-  schoolID: {type: String, required: true}
+  schoolID: {type: String, required: true},
+  active: {type: Boolean, required: true}
 }, {
   minimize: false
 });
