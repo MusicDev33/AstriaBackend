@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import announcementService from '@services/announcement.service';
 
 export const getAnnouncementsByParameterRoute = async (req: Request, res: Response) => {
-  const announcements = await announcementService.findModelsByParameter(req.params.param, req.params.value);
+  const sort = {_id: -1};
+  const announcements = await announcementService.findModelsByParameter(req.params.param, req.params.value, sort);
 
   if (announcements) {
     return res.json({success: true, msg: 'Success', announcements: announcements});
