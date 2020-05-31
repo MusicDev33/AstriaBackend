@@ -3,18 +3,12 @@ import enrollmentService from '@services/enrollment.service';
 import { Enrollment } from '@models/enrollment.model';
 
 // Get rid of this.
-export const enrollStudentRoute = async (req: Request, res: Response) => {
-  const newEnrollment = new Enrollment({
-    studentID: req.params.studentID,
-    courseID: req.params.courseID,
-    schoolID: req.params.schoolID,
-    instructorID: req.params.instructorID
-  });
+export const getCourseEnrollmentsByParamRoute = async (req: Request, res: Response) => {
 
-  const enrolledStudent = await enrollmentService.saveModel(newEnrollment);
+  const enrolledStudents = await enrollmentService.findModelsByParameter(req.params.param, req.params.paramValue)
 
-  if (enrolledStudent) {
-    return res.json({success: true, msg: 'Successfully enrolled student!', enrollment: enrolledStudent});
+  if (enrolledStudents) {
+    return res.json({success: true, msg: 'Found enrollments', payload: enrolledStudents});
   }
-  return res.json({success: false, msg: 'Could not enroll student...'});
+  return res.json({success: false, msg: 'Could not find enrollments...'});
 };
