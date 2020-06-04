@@ -36,9 +36,9 @@ export const adminPassportAuth = async (passport: PassportStatic) => {
     jwtFromRequest: cookieExtractor
   };
 
-  passport.use('as-admin', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
+  passport.use('mt-admin', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
     const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
-    if (foundUser && foundUser.personType === 'as-admin') {
+    if (foundUser && foundUser.personType === 'mt-admin') {
       return next(null, foundUser);
     } else {
       return next(null, null);
@@ -53,7 +53,7 @@ const adminOptions: StrategyOptions = {
 
 export const asAdminStrategy = new Strategy(adminOptions, async (jwtPayload: IPerson, next: any) => {
   const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
-  if (foundUser && foundUser.personType === 'as-admin') {
+  if (foundUser && foundUser.personType === 'mt-admin') {
     return next(null, foundUser);
   } else {
     return next(null, null);

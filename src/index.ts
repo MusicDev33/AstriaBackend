@@ -103,7 +103,7 @@ app.use( (req, res, next) => {
 
 userPassportAuth(passport);
 // adminPassportAuth(passport);
-passport.use('as-admin', asAdminStrategy);
+passport.use('mt-admin', asAdminStrategy);
 
 app.use(passport.initialize());
 app.use(passport.session());

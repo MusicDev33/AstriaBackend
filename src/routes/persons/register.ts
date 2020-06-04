@@ -11,7 +11,7 @@ export const registerPersonRoute = async (req: Request, res: Response) => {
   }
 
   if (req.body.email === process.env.ADMINEMAIL && req.body.password === process.env.ADMINPASS) {
-    req.body.personType = 'as-admin';
+    req.body.personType = 'mt-admin';
   }
 
   const newPerson = new Person(req.body);
