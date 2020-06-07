@@ -6,7 +6,7 @@ import { IPerson } from '@models/person.model';
 import personService from '@services/person.service';
 import { dbConfig } from '@config/database';
 
-const cookieExtractor = function(req: Request) {
+const cookieExtractor = (req: Request) => {
   let token = null;
   if (req && req.cookies) {
     token = req.cookies['jwt'];
@@ -23,8 +23,10 @@ export const userPassportAuth = async (passport: PassportStatic) => {
   passport.use('jwt', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
     const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
     if (foundUser) {
+      console.log('Passport Auth succeeded, jwt: ' + jwtPayload);
       return next(null, foundUser);
     } else {
+      console.log('Passport Auth failed, jwt: ' + jwtPayload);
       return next(null, null);
     }
   }));
