@@ -5,13 +5,15 @@ export interface IEnrollment extends Document {
   courseID: string;
   schoolID: string;
   studentName: string;
+  active: boolean;
 }
 
 const EnrollmentSchema: Schema = new Schema({
   studentID: {type: String, required: true},
   courseID: {type: String, required: true},
   schoolID: {type: String, required: true},
-  studentName: {type: String, required: true}
+  studentName: {type: String, required: true},
+  active: {type: Boolean, required: true}
 }, {
   minimize: false
 });

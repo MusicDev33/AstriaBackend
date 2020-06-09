@@ -22,15 +22,15 @@ export const readAnnouncementsRoute = async (req: Request, res: Response) => {
   const documentIDs = req.body.documentIDs;
 
   const results: string[] = await Promise.all(documentIDs.map(async (id: string): Promise<IReadTracker | null> => {
-      const readTracker = new ReadTracker({
-        userID: req.body.userID,
-        type: 'announcement',
-        documentID: id,
-        isRead: true
-      });
+    const readTracker = new ReadTracker({
+      userID: req.body.userID,
+      type: 'announcement',
+      documentID: id,
+      isRead: true
+    });
 
-      const createdReadTracker = readTrackerService.saveModel(readTracker);
-      return createdReadTracker;
+    const createdReadTracker = readTrackerService.saveModel(readTracker);
+    return createdReadTracker;
   }));
 
   if (results) {

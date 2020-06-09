@@ -7,6 +7,9 @@ export interface IAnnouncement extends Document {
   author: string;
   authorID: string;
   time: Date;
+  icon: string;
+  iconColor: string;
+  iconBgColor: string;
 }
 
 const AnnouncementSchema: Schema = new Schema({
@@ -15,7 +18,10 @@ const AnnouncementSchema: Schema = new Schema({
   courseID: {type: String, required: true},
   author: {type: String, required: true},
   authorID: {type: String, required: true},
-  time: {type: Date, required: true}
+  time: {type: Date, required: true},
+  icon: {type: String, required: true},
+  iconColor: {type: String, required: true},
+  iconBgColor: {type: String, required: true}
 }, {
   minimize: false
 });
