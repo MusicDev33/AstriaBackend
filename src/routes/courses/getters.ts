@@ -20,7 +20,7 @@ export const getCourseForInstructorRoute = async (req: Request, res: Response) =
   const foundCourse = await courseService.findOneModelByQuery(query);
 
   if (foundCourse) {
-    return res.json({success: true, msg: 'Successfully found courses', course: foundCourse});
+    return res.json({success: true, msg: 'Successfully found courses', payload: foundCourse});
   }
   return res.json({success: false, msg: 'Could not find courses...'});
 };
