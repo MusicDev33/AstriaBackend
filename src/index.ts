@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
        to: process.env.TESTPHONE
   }).then((message: any) => console.log(message.sid));
 }
-
+/*
 let credentials: {key: string, cert: string} = {key: '', cert: ''};
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST')
 
   credentials = {key: privateKey, cert: certificate};
 }
-
+*/
 mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
