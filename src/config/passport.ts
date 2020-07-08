@@ -8,9 +8,12 @@ import { dbConfig } from '@config/database';
 
 const cookieExtractor = (req: Request) => {
   let token = null;
+  /*
   if (req && req.cookies) {
     token = req.cookies['jwt'];
   }
+  */
+  token = req.get('ID-JWT') as string | null;
   return token;
 };
 

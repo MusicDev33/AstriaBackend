@@ -33,7 +33,8 @@ export const authRoute = async (req: Request, res: Response) => {
 };
 
 export const authRequest = async (req: Request, res: Response) => {
-  const decodedJwt = jwt.decode(req.cookies['jwt']);
+  // const decodedJwt = jwt.decode(req.cookies['jwt']);
+  const decodedJwt = jwt.decode(req.get('ID-JWT') as string);
   if (!decodedJwt) {
     return res.json({success: false, msg: 'Something went wrong with auth request.'});
   }
