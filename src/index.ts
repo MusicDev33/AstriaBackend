@@ -67,8 +67,6 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
-app.options('*', cors())
-
 const whitelist = ['https://demo.meteorlms.com', 'https://meteorlms.com', 'https://asapi.inquantir.com']
 const corsOptions = {
   origin: (origin: any, callback: any) => {
@@ -79,6 +77,8 @@ const corsOptions = {
     }
   }
 }
+
+app.options('*', cors(corsOptions));
 
 // Allows other domains to use this domain as an API
 /*
