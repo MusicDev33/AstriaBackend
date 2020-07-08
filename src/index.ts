@@ -37,8 +37,8 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 let credentials: {key: string, cert: string} = {key: '', cert: ''};
 
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
-  const privateKey  = fs.readFileSync('/etc/letsencrypt/live/inquantir.com/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync('/etc/letsencrypt/live/inquantir.com/cert.pem', 'utf8');
+  const privateKey  = fs.readFileSync('/etc/letsencrypt/live/meteorlms.com/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/meteorlms.com/cert.pem', 'utf8');
 
   credentials = {key: privateKey, cert: certificate};
 }
@@ -113,7 +113,7 @@ const checkAgent = (req: Request, res: Response, next: any) => {
   const agent = req.header('AS-User-Agent') as string;
   if (acceptedAgents.indexOf(agent) <= -1) {
     const resText = '<h1>404 - Here\'s a cool picture of Blaziken and Lucario:<br><br>';
-    const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">'
+    const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">';
     res.status(404).send(resText + resImg);
   }
   next();
@@ -133,7 +133,9 @@ app.use(apiBase + 'enrollments', RoutesLib.EnrollmentRoutes);
 // app.use(express.static(path.join(__dirname, 'public')));
 console.log(apiBase);
 app.get(apiBase, (req, res) => {
-  res.status(404).send('404 Error');
+  const resText = '<h1>404 - Here\'s a cool picture of Blaziken and Lucario:<br><br>';
+  const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">';
+  res.status(404).send(resText + resImg);
 });
 
 
