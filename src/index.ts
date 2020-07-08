@@ -67,6 +67,17 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+const whitelist = ['https://demo.meteorlms.com', 'https://meteorlms.com']
+const corsOptions = {
+  origin: function (origin: any, callback: any) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 // Allows other domains to use this domain as an API
 /*
 const originsWhitelist = [
@@ -85,7 +96,7 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 */
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Passport Middleware
 
