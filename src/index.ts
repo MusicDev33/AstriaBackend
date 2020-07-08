@@ -68,6 +68,7 @@ app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
 // Allows other domains to use this domain as an API
+/*
 const originsWhitelist = [
   'http://127.0.0.1:4000', 'http://localhost:4000', 'http://127.0.0.1:4200', 'http://localhost:4200',
   'astria.inquantir.com'
@@ -82,10 +83,14 @@ const corsOptions: cors.CorsOptions = {
   credentials: true
 }
 app.use(cors(corsOptions));
+*/
+
+app.use(cors());
 
 // Passport Middleware
 
 // Access Control
+/*
 app.use( (req, res, next) => {
   const allowedOrigins = [
     'http://127.0.0.1:4000', 'http://localhost:4000', 'http://127.0.0.1:4200', 'http://localhost:4200',
@@ -100,6 +105,7 @@ app.use( (req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   return next();
 });
+*/
 
 userPassportAuth(passport);
 // adminPassportAuth(passport);
