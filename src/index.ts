@@ -28,7 +28,7 @@ require('dotenv-defaults/config');
 if (process.env.NODE_ENV === 'PRODUCTION') {
   const client = require('twilio')(process.env.TWILSID, process.env.TWILAUTH);
   client.messages.create({
-       body: 'Hey Ryan! Let me know if you got this text.',
+       body: 'Hey! Your server restarted for some reason!',
        from: '+12057549322',
        to: process.env.TESTPHONE
   }).then((message: any) => console.log(message.sid));
