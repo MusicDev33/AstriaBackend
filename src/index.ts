@@ -69,6 +69,7 @@ app.set('trust proxy', 1);
 
 const whitelist = ['https://demo.meteorlms.com', 'https://meteorlms.com', 'https://asapi.inquantir.com']
 const corsOptions = {
+  credentials: true,
   origin: (origin: any, callback: any) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
