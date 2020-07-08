@@ -67,13 +67,13 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
-const whitelist = ['https://demo.meteorlms.com', 'https://meteorlms.com']
+const whitelist = ['https://demo.meteorlms.com', 'https://meteorlms.com', 'https://asapi.inquantir.com']
 const corsOptions = {
-  origin: function (origin: any, callback: any) {
+  origin: (origin: any, callback: any) => {
     if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback(null, true);
     }
   }
 }
