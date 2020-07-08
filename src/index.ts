@@ -138,7 +138,17 @@ app.get(apiBase, (req, res) => {
   res.status(404).send(resText + resImg);
 });
 
+app.listen(port, () => {
+  console.log('\nAstria Backend started in mode \'' + process.env.NODE_ENV + '\'');
+  if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
+    console.log('TLS/HTTPS is on.');
+  } else {
+    console.log('TLS/HTTPS is off.');
+  }
+  console.log('Port: ' + port);
+});
 
+/*
 if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
   const httpsServer = https.createServer(credentials, app);
   httpsServer.listen(port, () => {
@@ -153,3 +163,4 @@ if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST')
     console.log('Port: ' + port);
   });
 }
+*/
