@@ -9,8 +9,10 @@ export interface IAssignment extends Document {
   type: string; // What kind of assignment? A Quiz? Upload?
   allowedFileExtensions: string[];
   points: number;
+  studentScore: number;
   courseID: string;
   graded: boolean;
+  layoutID: string;
 }
 
 const AssignmentSchema: Schema = new Schema({
@@ -22,8 +24,10 @@ const AssignmentSchema: Schema = new Schema({
   type: {type: String, required: true},
   allowedFileExtensions: [{type: String, required: false}],
   points: {type: Number, required: false},
+  studentScore: {type: String, required: true},
   courseID: {type: String, required: true},
-  graded: {type: Boolean, required: true}
+  graded: {type: Boolean, required: true},
+  layoutID: {type: String, required: false}
 }, {
   minimize: false
 });
