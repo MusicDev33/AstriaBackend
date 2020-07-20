@@ -1,13 +1,13 @@
-# Astria Backend Dev Note
+# MeteorLMS Backend Dev Note
 Because TypeScript can complicate things, run the backend using this:
 
-`pm2 start npm --name=asbdev -- run start`
+`pm2 start npm --name=mtbdev -- run start`
 
 ### For Production
-`pm2 start npm --name=asbprod -- run prod`
+`pm2 start npm --name=mtbprod -- run prod`
 
 ### For Remote Dev
-`pm2 start npm --name=asbdev -- run dev`
+`pm2 start npm --name=mtbdev -- run dev`
 
 #### Notes
 
