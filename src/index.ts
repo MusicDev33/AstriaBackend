@@ -153,7 +153,7 @@ app.use(apiBase + 'enrollments', RoutesLib.EnrollmentRoutes);
 // app.use(express.static(path.join(__dirname, 'public')));
 console.log(apiBase);
 app.get(apiBase, (req, res) => {
-  console.log(`Test API Bae: ${apiBase}`);
+  console.log(`Test API Base: ${apiBase}`);
   const resText = '<h1>404 - Here\'s a cool picture of Blaziken and Lucario:<br><br>';
   const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">';
   res.status(404).send(resText + resImg);
