@@ -148,6 +148,7 @@ app.use(apiBase + 'persons', RoutesLib.PersonRoutes);
 app.use(apiBase + 'schools', RoutesLib.SchoolRoutes);
 app.use(apiBase + 'announcements', RoutesLib.AnnouncementRoutes);
 app.use(apiBase + 'enrollments', RoutesLib.EnrollmentRoutes);
+app.use(apiBase + 'assignments', RoutesLib.AssignmentRoutes);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));
