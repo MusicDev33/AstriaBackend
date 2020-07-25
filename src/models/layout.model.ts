@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface ILayout extends Document {
-
+  nonStrict?: boolean;
 }
 
 const LayoutSchema: Schema = new Schema({

@@ -1,17 +1,9 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
-export interface IAssignment extends Document {
-  name: string;
-  openDate: Date;
-  dueDate: Date;
-  closeDate: Date;
-  description?: string;
-  type: string; // What kind of assignment? A Quiz? Upload?
-  allowedFileExtensions?: string[];
-  points?: number;
-  courseID: string;
-  graded: boolean;
-  layoutID?: string;
+export interface ICompletion extends Document {
+  score?: number;
+  maxScore?: number;
+  completed?: boolean;
   nonStrict?: boolean;
 }
 

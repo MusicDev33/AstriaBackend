@@ -5,15 +5,12 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import fs from 'fs';
 import helmet from 'helmet';
-import https from 'https';
 import mongoose from 'mongoose';
 import passport from 'passport';
-import path from 'path';
 
 import { dbConfig } from '@config/database';
-import { port, apiBase, acceptedAgents } from './config/constants';
+import { port, apiBase, acceptedAgents } from '@config/constants';
 import * as RoutesLib from '@config/route-defs';
 
 // const rustAddons = require('../native');

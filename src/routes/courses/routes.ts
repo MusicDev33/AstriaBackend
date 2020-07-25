@@ -5,6 +5,7 @@ import * as RouteFunctions from './route.collector';
 
 router.get('/', RouteFunctions.testRoute);
 router.get('/course/:schoolID/:instructorID/:courseCode', RouteFunctions.getCourseForInstructorRoute);
+router.get('/course/:courseID/assignments', RouteFunctions.getCourseAssignments);
 router.post('/add', RouteFunctions.addCourseRoute);
 router.post('/course/:schoolID/:instructorID/:courseCode/:courseParam', RouteFunctions.setCourseParamRoute);
 

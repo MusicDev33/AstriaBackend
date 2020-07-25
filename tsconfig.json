@@ -24,7 +24,9 @@
           "@classes/*": ["classes/*"],
           "@dbtest/*": ["dbtest/*"],
           "@validate/*": ["validate/*"],
-          "@logger/*": ["logger/*"]
+          "@logger/*": ["logger/*"],
+          "@schemas/*": ["schemas/*"],
+          "@gentools/*": ["gentools/*"]
         },
     },
     "include": [
