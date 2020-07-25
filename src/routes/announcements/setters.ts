@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import readTrackerService from '@services/readtracker.service';
-import { ReadTracker, IReadTracker } from '@models/readtracker.model';
+import { ReadTracker, IReadTracker } from '@models/read-tracker.model';
 
 export const readOneAnnouncementRoute = async (req: Request, res: Response) => {
   const readTracker = new ReadTracker({

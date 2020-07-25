@@ -3,16 +3,7 @@ require('tsconfig-paths/register');
 import { Project } from 'ts-morph';
 import { generateSchema } from '@gentools/schemablock.gen';
 import fs from 'fs';
-import CodeBlockWriter from 'code-block-writer';
-import { getMongooseString } from '@gentools/type.map';
-
-
-const writer = new CodeBlockWriter({
-    newLine: "\r\n",
-    indentNumberOfSpaces: 2,
-    useTabs: true,
-    useSingleQuote: true
-});
+import { generateModelName } from '@gentools/modelname.gen';
 
 const project = new Project({
   tsConfigFilePath: 'tsconfig.json',
@@ -23,7 +14,7 @@ const project = new Project({
 
 fs.readdir('src/models/', (err, files) => {
   files.forEach(async (file) => {
-    const modelName = file.split('.')[0][0].toUpperCase() + file.split('.')[0].substring(1);
+    const modelName = generateModelName(file);
 
     project.addSourceFileAtPath(`src/models/${file}`);
     const sourceFile = project.getSourceFileOrThrow(file);

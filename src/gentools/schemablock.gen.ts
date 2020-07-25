@@ -25,14 +25,15 @@ export const generateSchema = (file: string, name: string, properties: PropertyS
           strict = false;
           return;
         }
-        
-        const propertyType = property.getType().getText().split(' | ')[0];
+
+        const propertyType = property.getType().getText().split(' | ')[0].split('.');
+        const finalType = propertyType[propertyType.length - 1];
         if (index > 0) {
           writer.write(',');
         }
         writer.newLine();
         writer.write(`${property.getName()}: `);
-        const line = getMongooseString(propertyType, `required: ${!property.hasQuestionToken()}`);
+        const line = getMongooseString(finalType, `required: ${!property.hasQuestionToken()}`);
         writer.write(line);
       });
     }
@@ -58,7 +59,7 @@ export const generateSchema = (file: string, name: string, properties: PropertyS
     fs.mkdirSync('src/schemas');
   }
 
-  const fileName = `src/schemas/${name.toLowerCase()}.schema.ts`;
+  const fileName = `src/schemas/${file.split('.')[0].toLowerCase()}.schema.ts`;
 
   if (fs.existsSync(fileName)) {
     fs.unlinkSync(fileName);
@@ -68,7 +69,7 @@ export const generateSchema = (file: string, name: string, properties: PropertyS
     if (err) {
       console.log(err);
     } else {
-      console.log(`${name.toLowerCase()}.schema.ts written!`);
+      console.log(`${file.split('.')[0].toLowerCase()}.schema.ts written!`);
     }
   });
 };
