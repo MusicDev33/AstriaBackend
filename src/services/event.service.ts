@@ -1,4 +1,5 @@
-import { Event, IEvent } from '@models/event.model';
+import { IEvent } from '@models/event.model';
+import { Event } from '@schemas/event.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class EventService extends ModelService<IEvent> {

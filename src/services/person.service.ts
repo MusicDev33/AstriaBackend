@@ -1,4 +1,5 @@
-import { Person, IPerson } from '@models/person.model';
+import { IPerson } from '@models/person.model';
+import { Person } from '@schemas/person.schema';
 import { ModelService } from '@classes/model.service.class';
 
 import * as bcrypt from 'bcryptjs';

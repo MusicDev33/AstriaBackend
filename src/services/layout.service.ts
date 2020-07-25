@@ -1,4 +1,5 @@
-import { Layout, ILayout } from '@models/layout.model';
+import { ILayout } from '@models/layout.model';
+import { Layout } from '@schemas/layout.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class LayoutService extends ModelService<ILayout> {

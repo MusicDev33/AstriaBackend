@@ -1,4 +1,5 @@
-import { School, ISchool } from '@models/school.model';
+import { ISchool } from '@models/school.model';
+import { School } from '@schemas/school.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class SchoolService extends ModelService<ISchool> {

@@ -1,4 +1,5 @@
-import { Task, ITask } from '@models/task.model';
+import { ITask } from '@models/task.model';
+import { Task } from '@schemas/task.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class TaskService extends ModelService<ITask> {

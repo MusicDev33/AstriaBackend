@@ -1,4 +1,5 @@
-import { Announcement, IAnnouncement } from '@models/announcement.model';
+import { IAnnouncement } from '@models/announcement.model';
+import { Announcement } from '@schemas/announcement.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class AnnouncementService extends ModelService<IAnnouncement> {

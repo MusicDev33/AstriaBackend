@@ -1,4 +1,5 @@
-import { Quiz, IQuiz } from '@models/quiz.model';
+import { IQuiz } from '@models/quiz.model';
+import { Quiz } from '@schemas/quiz.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class QuizService extends ModelService<IQuiz> {

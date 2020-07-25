@@ -1,4 +1,5 @@
-import { Assignment, IAssignment } from '@models/assignment.model';
+import { IAssignment } from '@models/assignment.model';
+import { Assignment } from '@schemas/assignment.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class AssignmentService extends ModelService<IAssignment> {

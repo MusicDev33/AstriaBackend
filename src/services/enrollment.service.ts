@@ -1,4 +1,5 @@
-import { Enrollment, IEnrollment } from '@models/enrollment.model';
+import { IEnrollment } from '@models/enrollment.model';
+import { Enrollment } from '@schemas/enrollment.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class EnrollmentService extends ModelService<IEnrollment> {

@@ -1,4 +1,5 @@
-import { ReadTracker, IReadTracker } from '@models/read-tracker.model';
+import { IReadTracker } from '@models/read-tracker.model';
+import { ReadTracker } from '@schemas/read-tracker.schema';
 import { ModelService } from '@classes/model.service.class';
 
 class ReadTrackerService extends ModelService<IReadTracker> {

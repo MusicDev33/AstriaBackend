@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { Document } from 'mongoose';
 
 export interface IReadTracker extends Document {
   userID: string;
@@ -6,14 +6,3 @@ export interface IReadTracker extends Document {
   documentID: string;
   isRead: boolean;
 }
-
-const ReadTrackerSchema: Schema = new Schema({
-  userID: {type: String, required: true},
-  type: {type: String, required: true},
-  documentID: {type: String, required: true},
-  isRead: {type: Boolean, required: true}
-}, {
-  minimize: false
-});
-
-export const ReadTracker: Model<IReadTracker> = mongoose.model<IReadTracker>('ReadTracker', ReadTrackerSchema);

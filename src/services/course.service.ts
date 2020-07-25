@@ -1,4 +1,5 @@
-import { Course, ICourse } from '@models/course.model';
+import { ICourse } from '@models/course.model';
+import { Course } from '@schemas/course.schema';
 import { IEnrollment }  from '@models/enrollment.model';
 import { ModelService } from '@classes/model.service.class';
 
@@ -43,7 +44,7 @@ class CourseService extends ModelService<ICourse> {
 
       return errorCourse;
     });
-    
+
     return await Promise.all(courseArray);
   }
 }
