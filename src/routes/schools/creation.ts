@@ -1,6 +1,6 @@
 import schoolService from '@services/school.service';
 import { Request, Response, NextFunction } from 'express';
-import { School } from '@models/school.model';
+import { School } from '@schemas/school.schema';
 
 export const addSchoolRoute = async (req: Request, res: Response, next: NextFunction) => {
   const newSchool = new School(req.body);

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { Announcement, IAnnouncement } from '@models/announcement.model';
+import { IAnnouncement } from '@models/announcement.model';
+import { Announcement } from '@schemas/announcement.schema';
 import announcementService from '@services/announcement.service';
 import personService from '@services/person.service';
 import enrollmentService from '@services/enrollment.service';

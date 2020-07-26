@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import { Person, IPerson } from '@models/person.model';
 import personService from '@services/person.service';
 import { validateLogin } from '@validate/auth.validate';
 import { dbConfig } from '@config/database';

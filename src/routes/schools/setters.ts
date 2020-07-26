@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import enrollmentService from '@services/enrollment.service';
 
-import { Enrollment } from '@models/enrollment.model';
+import { Enrollment } from '@schemas/enrollment.schema';
 
 // This got moved to enrollments/creation.ts
 export const enrollStudentRoute = async (req: Request, res: Response) => {

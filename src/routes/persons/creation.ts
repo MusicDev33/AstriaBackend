@@ -1,6 +1,6 @@
 import personService from '@services/person.service';
 import { Request, Response } from 'express';
-import { Person } from '@models/person.model';
+import { Person } from '@schemas/person.schema';
 
 import { generatePassword } from '@utils/password.generator';
 import { generateProfileURL } from '@utils/profileurl.generator';

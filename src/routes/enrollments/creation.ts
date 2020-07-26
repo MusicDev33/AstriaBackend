@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import enrollmentService from '@services/enrollment.service';
 import personService from '@services/person.service';
-import { Enrollment } from '@models/enrollment.model';
+import { Enrollment } from '@schemas/enrollment.schema';
 
 export const enrollStudentRoute = async (req: Request, res: Response) => {
   const student = await personService.findOneModelByParameter('_id', req.body.studentID);

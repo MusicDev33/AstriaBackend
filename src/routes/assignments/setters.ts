@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import assignmentService from '@services/assignment.service';
 import layoutService from '@services/layout.service';
-import { Layout } from '@models/layout.model'
+import { Layout } from '@schemas/layout.schema';
 
 export const addAssignmentLayoutRoute = async (req: Request, res: Response) => {
   const assignment = await assignmentService.findOneModelByParameter('_id', req.params.assignmentID);
@@ -20,5 +20,5 @@ export const addAssignmentLayoutRoute = async (req: Request, res: Response) => {
 
   await assignmentService.saveChangedModel(assignment, 'layoutID');
 
-  return res.json({success: true, msg: 'Saved assignment.', assignment: assignment});
+  return res.json({success: true, msg: 'Saved assignment.', payload: assignment});
 };

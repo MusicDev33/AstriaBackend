@@ -1,6 +1,6 @@
 import personService from '@services/person.service';
 import { Request, Response } from 'express';
-import { Person } from '@models/person.model';
+import { Person } from '@schemas/person.schema';
 
 import { validateRegister } from '@validate/register.validate';
 

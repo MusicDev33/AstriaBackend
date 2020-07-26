@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import courseService from '@services/course.service';
-import { Course } from '@models/course.model';
+import { Course } from '@schemas/course.schema';
 
 import { generateCourseID } from '@utils/courseid.generator';
 
