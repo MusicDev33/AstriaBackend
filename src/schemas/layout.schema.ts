@@ -2,6 +2,7 @@ import mongoose, { Schema, Model } from 'mongoose';
 import { ILayout } from '@models/layout.model';
 
 const LayoutSchema: Schema = new Schema({
+	objects: {type: Object, required: true},
 },{
 	minimize: false, 
 	strict: false
