@@ -21,7 +21,6 @@ class LayoutService extends ModelService<ILayout> {
   // Their small size makes Redis more efficient when we're constantly
   // making writes.
   public async autosaveLayout(layout: ILayout): Promise<ILayout | null> {
-    console.log('test');
     // Just have to make sure we get the exact copy of the object
     let layoutInDB = await layoutService.findOneModelByParameter('_id', layout._id);
     if (!layoutInDB) {
