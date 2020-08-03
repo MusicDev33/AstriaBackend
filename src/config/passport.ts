@@ -26,7 +26,6 @@ export const userPassportAuth = async (passport: PassportStatic) => {
   passport.use('jwt', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
     const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
     if (foundUser) {
-      console.log('Passport Auth succeeded, jwt: ' + jwtPayload);
       return next(null, foundUser);
     } else {
       console.log('Passport Auth failed, jwt: ' + jwtPayload);

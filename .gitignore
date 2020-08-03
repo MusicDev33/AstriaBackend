@@ -6,3 +6,5 @@ native/artifacts.json
 /logs
 *.env
 .env
+error.log
+info.log
