@@ -51,5 +51,5 @@ export const getAssignmentLayoutRoute = async (req: Request, res: Response) => {
     return res.json({success: true, msg: 'Layout found.', payload: layout});
   }
 
-  return res.status(500).json({success: false, msg: 'Could not find layout...'});
+  return res.status(200).json({success: false, msg: 'Could not find layout...'});
 }

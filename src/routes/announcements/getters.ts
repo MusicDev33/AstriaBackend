@@ -10,7 +10,7 @@ export const getAnnouncementsByParameterRoute = async (req: Request, res: Respon
   const announcements = await announcementService.findModelsByParameter(req.params.param, req.params.value, sort);
 
   if (announcements) {
-    return res.json({success: true, msg: 'Success', announcements: announcements});
+    return res.json({success: true, msg: 'Success', payload: announcements});
   }
   return res.status(500).json({success: false, msg: 'Could not get announcements...'});
 };
