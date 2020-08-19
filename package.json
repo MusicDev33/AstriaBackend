@@ -53,10 +53,10 @@
     "neon-cli": "^0.4.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "redis-json": "^4.0.2",
+    "redis-json": "^4.1.0",
     "ts-morph": "^7.3.0",
     "tsconfig-paths": "^3.9.0",
-    "twilio": "^3.48.2",
+    "twilio": "^3.49.0",
     "typescript": "^3.9.7",
     "winston": "^3.3.3"
   },
