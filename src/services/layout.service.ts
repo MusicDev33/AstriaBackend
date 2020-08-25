@@ -41,6 +41,25 @@ class LayoutService extends ModelService<ILayout> {
 
     return savedLayout;
   }
+
+  public async getLayoutByAssignmentID(assignmentID: string): Promise<ILayout | null> {
+    const layout = await layoutService.findOneModelByParameter('assignmentID', assignmentID);
+
+    if (!layout) {
+      return null;
+    }
+
+    // Can't give out the answers ;)
+    for (const layoutItem of layout.objects) {
+      if (layoutItem.answers) {
+        for (const answer of layoutItem.answers) {
+          delete answer['isCorrect'];
+        }
+      }
+    }
+    console.log('done');
+    return layout;
+  }
 }
 
 const layoutService = LayoutService.getInstance();

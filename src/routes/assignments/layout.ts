@@ -45,7 +45,7 @@ export const finalAutosaveLayoutRoute = async (req: Request, res: Response) => {
 }
 
 export const getAssignmentLayoutRoute = async (req: Request, res: Response) => {
-  const layout = await layoutService.findOneModelByParameter('assignmentID', req.params.assignmentID);
+  const layout = await layoutService.getLayoutByAssignmentID(req.params.assignmentID);
 
   if (layout) {
     return res.json({success: true, msg: 'Layout found.', payload: layout});
