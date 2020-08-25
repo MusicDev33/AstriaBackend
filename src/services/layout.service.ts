@@ -57,7 +57,6 @@ class LayoutService extends ModelService<ILayout> {
         }
       }
     }
-    console.log('done');
     return layout;
   }
 }
