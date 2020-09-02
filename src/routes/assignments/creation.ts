@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import assignmentService from '@services/assignment.service';
+import AssignSubmissionService from '@services/assign-submission.service';
+
 import { Assignment } from '@schemas/assignment.schema';
+import { AssignSubmission } from '@schemas/assign-submission.schema';
 
 export const createAssignmentRoute = async (req: Request, res: Response) => {
   const newAssignment = new Assignment(req.body);
