@@ -1,25 +1,19 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-let dbConfig: {adminSecret: string, database: string, secret: string};
+let dbConfig: {database: string};
 
 if (process.env.NODE_ENV === 'DEVTEST') {
   dbConfig = {
-    adminSecret: '!2naMgb<asdf?oeiTG542',
-    database: 'mongodb://localhost:27017/asdevtest',
-    secret: 'SLocgeAPmcdw2ZTaPUELyGJOki8JDtun'
+    database: 'mongodb://localhost:27017/asdevtest'
   };
 } else if (process.env.NODE_ENV === 'development') {
   dbConfig = {
-    adminSecret: '!2naMdf?oeiTG542gb<as',
-    database: 'mongodb://localhost:27017/astest',
-    secret: 'bD7gJaSpTomTqQ2UvRawxfLdqX8NmEdU'
+    database: 'mongodb://localhost:27017/astest'
   };
 } else {
   dbConfig = {
-    adminSecret: '!2naMdf?oeiTG542gb<as',
-    database: 'mongodb://localhost:27017/astest',
-    secret: '6Ly20w0Wn6nXWSd0D7VlJPHrvBixVFaz'
+    database: 'mongodb://localhost:27017/astest'
   };
 }
 

@@ -27,7 +27,7 @@ export const autosaveSubmission = async (req: Request, res: Response) => {
     }
   }
 
-  const savedSub = await AssignSubmissionService.autosaveAssignmentSubmission(newSubmission);
+  const savedSub = await AssignSubmissionService.autosaveAssignmentSubmission(newSubmission, req.params.userID);
 
   if (savedSub) {
     return res.json({success: true, msg: 'Submission autosaved successfully.', payload: savedSub});

@@ -15,7 +15,7 @@ import * as RoutesLib from '@config/route-defs';
 
 // const rustAddons = require('../native');
 
-import { userPassportAuth, adminPassportAuth, asAdminStrategy } from '@config/passport';
+import { userPassportAuth, userAuthStrategy, asAdminStrategy } from '@config/passport';
 
 import { Request, Response } from 'express';
 dotenv.config();
@@ -118,9 +118,9 @@ app.use( (req, res, next) => {
 });
 */
 
-userPassportAuth(passport);
 // adminPassportAuth(passport);
 passport.use('mt-admin', asAdminStrategy);
+passport.use('jwt', userAuthStrategy);
 
 app.use(passport.initialize());
 app.use(passport.session());

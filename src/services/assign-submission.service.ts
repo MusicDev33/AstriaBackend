@@ -17,10 +17,14 @@ class AssignSubmissionService extends ModelService<IAssignSubmission> {
     return AssignSubmissionService.instance;
   }
 
-  public async autosaveAssignmentSubmission(submission: IAssignSubmission): Promise<IAssignSubmission | null> {
+  public async autosaveAssignmentSubmission(submission: IAssignSubmission, userID: string): Promise<IAssignSubmission | null> {
     const foundSub = await assignSubmissionService.findOneModelByParameter('_id', submission._id);
 
     if (!foundSub) {
+      return null;
+    }
+
+    if (foundSub.userID !== userID) {
       return null;
     }
 

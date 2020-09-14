@@ -19,12 +19,13 @@ const cookieExtractor = (req: Request) => {
 
 export const userPassportAuth = async (passport: PassportStatic) => {
   const options: StrategyOptions = {
-    secretOrKey: dbConfig.secret,
+    secretOrKey: process.env.DB_SECRET,
     jwtFromRequest: cookieExtractor
   };
 
   passport.use('jwt', new Strategy(options, async (jwtPayload: IPerson, next: any) => {
     const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
+    console.log('passport');
     if (foundUser) {
       return next(null, foundUser);
     } else {
@@ -34,9 +35,25 @@ export const userPassportAuth = async (passport: PassportStatic) => {
   }));
 };
 
+const userOptions: StrategyOptions = {
+  secretOrKey: process.env.DB_SECRET,
+  jwtFromRequest: cookieExtractor
+};
+
+export const userAuthStrategy = new Strategy(userOptions, async (jwtPayload: IPerson, next: any) => {
+  console.log('test');
+  const foundUser = await personService.findOneModelByParameter('_id', jwtPayload._id);
+  if (foundUser) {
+    return next(null, foundUser);
+  } else {
+    console.log('Passport Auth failed, jwt: ' + jwtPayload);
+    return next(null, null);
+  }
+});
+
 export const adminPassportAuth = async (passport: PassportStatic) => {
   const options: StrategyOptions = {
-    secretOrKey: dbConfig.secret,
+    secretOrKey: process.env.DB_SECRET,
     jwtFromRequest: cookieExtractor
   };
 
@@ -45,13 +62,14 @@ export const adminPassportAuth = async (passport: PassportStatic) => {
     if (foundUser && foundUser.personType === 'mt-admin') {
       return next(null, foundUser);
     } else {
+      console.log('Passport Auth failed, jwt: ' + jwtPayload);
       return next(null, null);
     }
   }));
 };
 
 const adminOptions: StrategyOptions = {
-  secretOrKey: dbConfig.secret,
+  secretOrKey: process.env.DB_SECRET,
   jwtFromRequest: cookieExtractor
 };
 
@@ -60,6 +78,7 @@ export const asAdminStrategy = new Strategy(adminOptions, async (jwtPayload: IPe
   if (foundUser && foundUser.personType === 'mt-admin') {
     return next(null, foundUser);
   } else {
+    console.log('Passport Auth failed, jwt: ' + jwtPayload);
     return next(null, null);
   }
-})
+});

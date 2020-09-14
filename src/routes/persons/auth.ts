@@ -24,7 +24,7 @@ export const authRoute = async (req: Request, res: Response) => {
     user.password = '';
     // 5 years
     const time = 5 * 365 * 86400;
-    const jwtToken = jwt.sign(user.toJSON(), dbConfig.secret, {expiresIn: time}); // 5 years
+    const jwtToken = jwt.sign(user.toJSON(), process.env.DB_SECRET as string, {expiresIn: time}); // 5 years
     return res.json({success: true, msg: 'Logged in!', user: user, jwt: jwtToken});
   }
 
@@ -32,6 +32,7 @@ export const authRoute = async (req: Request, res: Response) => {
 };
 
 export const authRequest = async (req: Request, res: Response) => {
+  console.log('test');
   // const decodedJwt = jwt.decode(req.cookies['jwt']);
   const decodedJwt = jwt.decode(req.get('ID-JWT') as string);
   if (!decodedJwt) {

@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import enrollmentService from '@services/enrollment.service';
 import courseService from '@services/course.service';
-import { Enrollment } from '@models/enrollment.model';
 
 // Get rid of this.
 export const getCourseEnrollmentsByParamRoute = async (req: Request, res: Response) => {
