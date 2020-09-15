@@ -1,4 +1,4 @@
-import { Course } from '@models/course.model';
+import { Course } from '@schemas/course.schema';
 
 const creditCourse = new Course({
   icon: '<i class="far fa-credit-card"></i>',

@@ -52,8 +52,6 @@
     "module-alias": "^2.2.2",
     "mongoose": "^5.10.5",
     "neon-cli": "^0.4.0",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
     "redis-json": "^4.2.0",
     "ts-morph": "^8.1.0",
     "ts-node": "^9.0.0",

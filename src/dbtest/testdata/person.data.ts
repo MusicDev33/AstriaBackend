@@ -1,4 +1,4 @@
-import { Person } from '@models/person.model';
+import { Person } from '@schemas/person.schema';
 
 const testPerson1 = new Person({
   profileURL: 'test-1',

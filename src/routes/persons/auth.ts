@@ -3,7 +3,6 @@ import * as jwt from 'jsonwebtoken';
 
 import personService from '@services/person.service';
 import { validateLogin } from '@validate/auth.validate';
-import { dbConfig } from '@config/database';
 
 export const authRoute = async (req: Request, res: Response) => {
 

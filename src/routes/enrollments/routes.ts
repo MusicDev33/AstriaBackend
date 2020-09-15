@@ -1,13 +1,13 @@
 import express from 'express';
 const router = express.Router();
-import passport from 'passport';
 import * as RouteFunctions from './route.collector';
+import { userAuth } from '@config/auth';
 
 // TODO: shorten route name
-router.post('/create', passport.authenticate('jwt', {session: false}), RouteFunctions.enrollStudentRoute);
-router.get('/courses/:studentID', passport.authenticate('jwt', {session: false}), RouteFunctions.getStudentCourseEnrollmentsRoute);
+router.post('/create', userAuth(), RouteFunctions.enrollStudentRoute);
+router.get('/courses/:studentID', userAuth(), RouteFunctions.getStudentCourseEnrollmentsRoute);
 
-router.get('/:param/:paramValue', passport.authenticate('jwt', {session:false}), RouteFunctions.getCourseEnrollmentsByParamRoute);
+router.get('/:param/:paramValue', userAuth(), RouteFunctions.getCourseEnrollmentsByParamRoute);
 
 const EnrollmentRoutes = router;
 export default EnrollmentRoutes;

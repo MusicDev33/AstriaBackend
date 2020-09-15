@@ -1,17 +1,15 @@
 import express from 'express';
 const router = express.Router();
-import passport from 'passport';
 import * as RouteFunctions from './route.collector';
+import { userAuth } from '@config/auth';
 
-const passAuth = passport.authenticate('jwt', {session: false});
+router.get('/:assignmentID/layout', userAuth(), RouteFunctions.getAssignmentLayoutRoute);
 
-router.get('/:assignmentID/layout', passAuth, RouteFunctions.getAssignmentLayoutRoute);
-
-router.post('/:courseID/new', passAuth, RouteFunctions.createAssignmentRoute);
+router.post('/:courseID/new', userAuth(), RouteFunctions.createAssignmentRoute);
 router.post('/:assignmentID/new/submission/:userID', RouteFunctions.createAssignSubmissionRoute);
-router.post('/:assignmentID/new/layout', passAuth, RouteFunctions.addAssignmentLayoutRoute);
-router.post('/:assignmentID/autosave/layout/:userID', passAuth, RouteFunctions.autosaveLayoutRoute);
-router.post('/:assignmentID/finalsave/layout', passAuth, RouteFunctions.finalAutosaveLayoutRoute);
+router.post('/:assignmentID/new/layout', userAuth(), RouteFunctions.addAssignmentLayoutRoute);
+router.post('/:assignmentID/autosave/layout/:userID', userAuth(), RouteFunctions.autosaveLayoutRoute);
+router.post('/:assignmentID/finalsave/layout', userAuth(), RouteFunctions.finalAutosaveLayoutRoute);
 
 const AssignmentRoutes = router;
 export default AssignmentRoutes;
