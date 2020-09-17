@@ -31,7 +31,6 @@ export const userAuth = (role?: number) => {
     }
 
     const foundUser = await personService.findOneModelByParameter('_id', decodedToken._id);
-    console.log('passport');
     if (foundUser) {
       return next();
     } else {
