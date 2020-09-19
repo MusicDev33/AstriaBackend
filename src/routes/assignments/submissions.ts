@@ -18,7 +18,6 @@ export const createAssignSubmissionRoute = async (req: Request, res: Response) =
 
 export const autosaveSubmissionRoute = async (req: Request, res: Response) => {
   const newSubmission = new AssignSubmission(req.body);
-  console.log(req.body._id);
   if (!req.body._id) {
     const savedSubmission = await AssignSubmissionService.saveModel(newSubmission);
     if (!savedSubmission) {
