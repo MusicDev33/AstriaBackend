@@ -12,6 +12,6 @@ if (process.env.NODE_ENV === 'DEVTEST' || process.env.NODE_ENV === 'PRODUCTION')
   apiBase = '/v1/';
 }
 
-const acceptedAgents = ['ASAPIv1', 'ASiOSv1', 'ASAndroidv1'];
+export const acceptedAgents = ['ASAPIv1', 'ASiOSv1', 'ASAndroidv1'];
 
-export { port, apiBase, acceptedAgents };
+export { port, apiBase };

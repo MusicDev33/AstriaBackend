@@ -59,3 +59,35 @@ export const getSubmissionRoute = async (req: Request, res: Response) => {
 
   return res.status(404).json({success: false, msg: 'Could not find submission!'});
 }
+
+export const getClassSubmissionsRoute = async (req: Request, res: Response) => {
+  console.log('new');
+  if (!req.query.ids) {
+    return res.status(400).json({success: false, msg: 'Must provide a query!'});
+  }
+
+  if (!req.params.userID) {
+    return res.status(400).json({success: false, msg: 'Must provide a userID!'});
+  }
+
+  const ids = req.query.ids as string;
+  const userID = req.params.userID as string;
+  const query = {
+    'assignmentID': {'$all': ids.split(',')},
+    'userID': userID
+  };
+
+  const project = {
+    autosaved: 0,
+    objects: 0,
+    timeSubmitted: 0
+  }
+
+  const submissions = await AssignSubmissionService.findModelsByQuery(query);
+
+  if (!submissions) {
+    return res.json({success: false, msg: 'Could not find submissions'});
+  }
+
+  return res.json({success: false, msg: 'Found submissions', payload: submissions});
+}

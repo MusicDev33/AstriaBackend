@@ -88,12 +88,21 @@ export class ModelService<P extends Document> {
     }
   }
 
+  public async findModelsByAggregate(aggregate: any[], sort: any = {}, limit: number = 30): Promise<any[] | null> {
+    try {
+      const foundModels = await this.HelperClass.aggregate(aggregate).sort(sort).limit(limit).exec();
+      return foundModels;
+    } catch (err) {
+      return null;
+    }
+  }
+
   public async removeOneModelByParameter(param: string, paramValue: any): Promise<P | null> {
     if (this.bannedParams.includes(param)) {
       console.log(`Parameter '${param}' is banned!`);
       return null;
     }
-    
+
     const query: any = {};
     query[param] = paramValue;
     try {

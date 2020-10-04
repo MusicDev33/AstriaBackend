@@ -5,6 +5,7 @@ import { userAuth } from '@config/auth';
 
 router.get('/:assignmentID/layout', userAuth(), RouteFunctions.getAssignmentLayoutRoute);
 router.get('/:assignmentID/submission/:userID', userAuth(), RouteFunctions.getSubmissionRoute);
+router.get('/submission/:userID', userAuth(), RouteFunctions.getClassSubmissionsRoute);
 
 router.post('/:courseID/new', userAuth(), RouteFunctions.createAssignmentRoute);
 router.post('/:assignmentID/new/submission/:userID', RouteFunctions.createAssignSubmissionRoute);
