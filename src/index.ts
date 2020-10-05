@@ -8,15 +8,21 @@ import express from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 
-import { dbConfig } from '@config/database';
-import { port, apiBase, acceptedAgents } from '@config/constants';
+import { acceptedAgents } from '@config/constants';
 import * as RoutesLib from '@config/route-defs';
+import { validateVitalEnv } from '@validate/env.validate';
 
 // const rustAddons = require('../native');
 
 import { Request, Response } from 'express';
 dotenv.config();
 require('dotenv-defaults/config');
+
+// CONSTANTS
+const DB_SECRET = validateVitalEnv(process.env.DB_SECRET);
+const DB_URI = validateVitalEnv(process.env.DB_URI);
+const PORT = validateVitalEnv(process.env.API_PORT);
+const BASE_URL = validateVitalEnv(process.env.API_URL_BASE);
 
 // TWILIO
 if (process.env.NODE_ENV === 'PRODUCTION') {
@@ -27,22 +33,13 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
        to: process.env.TESTPHONE
   }).then((message: any) => console.log(message.sid));
 }
-/*
-let credentials: {key: string, cert: string} = {key: '', cert: ''};
 
-if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
-  const privateKey  = fs.readFileSync('/etc/letsencrypt/live/meteorlms.com/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync('/etc/letsencrypt/live/meteorlms.com/cert.pem', 'utf8');
-
-  credentials = {key: privateKey, cert: certificate};
-}
-*/
-mongoose.connect(dbConfig.database, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 mongoose.connection.on('connected', () => {
-  console.log('Database Connected: ' + dbConfig.database);
+  console.log('Database Connected: ' + DB_URI);
 });
 
 mongoose.connection.on('error', (err: any) => {
@@ -75,45 +72,7 @@ const corsOptions = {
 
 app.options('*', cors(corsOptions));
 
-// Allows other domains to use this domain as an API
-/*
-const originsWhitelist = [
-  'http://127.0.0.1:4000', 'http://localhost:4000', 'http://127.0.0.1:4200', 'http://localhost:4200',
-  'astria.inquantir.com'
-];
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, callback) => {
-    if (origin) {
-      const isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
-      callback(null, isWhitelisted);
-    }
-  },
-  credentials: true
-}
 app.use(cors(corsOptions));
-*/
-
-app.use(cors(corsOptions));
-
-// Passport Middleware
-
-// Access Control
-/*
-app.use( (req, res, next) => {
-  const allowedOrigins = [
-    'http://127.0.0.1:4000', 'http://localhost:4000', 'http://127.0.0.1:4200', 'http://localhost:4200',
-    'astria.inquantir.com'
-  ];
-  const origin = req.headers.origin;
-  if (origin && typeof origin === 'string' && allowedOrigins.indexOf(origin) > -1) {
-       res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  return next();
-});
-*/
 
 // Check IQ-User-Agent
 const checkAgent = (req: Request, res: Response, next: any) => {
@@ -130,18 +89,18 @@ const checkAgent = (req: Request, res: Response, next: any) => {
 
 // Routes
 
-app.use(apiBase + 'courses', RoutesLib.CourseRoutes);
-app.use(apiBase + 'persons', RoutesLib.PersonRoutes);
-app.use(apiBase + 'schools', RoutesLib.SchoolRoutes);
-app.use(apiBase + 'announcements', RoutesLib.AnnouncementRoutes);
-app.use(apiBase + 'enrollments', RoutesLib.EnrollmentRoutes);
-app.use(apiBase + 'assignments', RoutesLib.AssignmentRoutes);
+app.use(BASE_URL + 'courses', RoutesLib.CourseRoutes);
+app.use(BASE_URL + 'persons', RoutesLib.PersonRoutes);
+app.use(BASE_URL + 'schools', RoutesLib.SchoolRoutes);
+app.use(BASE_URL + 'announcements', RoutesLib.AnnouncementRoutes);
+app.use(BASE_URL + 'enrollments', RoutesLib.EnrollmentRoutes);
+app.use(BASE_URL + 'assignments', RoutesLib.AssignmentRoutes);
 
 // create public folder with the index.html when finished
 // app.use(express.static(path.join(__dirname, 'public')));
-console.log(apiBase);
-app.get(apiBase, (_, res: Response) => {
-  console.log(`Test API Base: ${apiBase}`);
+console.log(BASE_URL);
+app.get(BASE_URL, (_, res: Response) => {
+  console.log(`Test API Base: ${BASE_URL}`);
   const resText = '<h1>404 - Here\'s a cool picture of Blaziken and Lucario:<br><br>';
   const resImg = '<img src="https://pm1.narvii.com/6179/5434c40be48978d53a89c43c581bb0d84d1a4c56_hq.jpg">';
   res.status(404).send(resText + resImg);
@@ -154,12 +113,12 @@ app.get('', (_, res: Response) => {
   res.status(404).send(resText + resImg);
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log('\nAstria Backend started in mode \'' + process.env.NODE_ENV + '\'');
   if (process.env.NODE_ENV === 'PRODUCTION' || process.env.NODE_ENV === 'DEVTEST') {
     console.log('TLS/HTTPS is on.');
   } else {
     console.log('TLS/HTTPS is off.');
   }
-  console.log('Port: ' + port);
+  console.log('Port: ' + PORT);
 });

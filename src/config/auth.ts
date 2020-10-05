@@ -3,7 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 
 import { IPerson } from '@models/person.model';
 import personService from '@services/person.service';
-import { dbConfig } from '@config/database';
+import { validateVitalEnv } from '@validate/env.validate';
+
+const DB_SECRET = validateVitalEnv(process.env.DB_SECRET);
 
 const extractTokenFromCookie = (req: Request) => {
   let token = null;
@@ -24,7 +26,7 @@ export const userAuth = (role?: number) => {
       return res.status(401).send('Unauthorized');
     }
 
-    const decodedToken = jwt.verify(token, process.env.DB_SECRET as string) as IPerson;
+    const decodedToken = jwt.verify(token, DB_SECRET) as IPerson;
 
     if (!decodedToken || typeof decodedToken === 'string') {
       return res.status(401).send('Unauthorized');

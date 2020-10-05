@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import announcementService from '@services/announcement.service';
-import { Announcement } from '@schemas/announcement.schema';
+import { Announcement } from '@schemas/announcement/announcement.schema';
 
 export const createAnnouncementRoute = async (req: Request, res: Response) => {
   const newAncmnt = new Announcement(req.body);

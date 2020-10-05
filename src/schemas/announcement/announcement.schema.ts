@@ -1,8 +1,9 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import { IAnnouncement } from '@models/announcement.model';
+import { composeWithMongoose } from 'graphql-compose-mongoose';
 
 const AnnouncementSchema: Schema = new Schema({
-	header: {type: String, required: true},
+	header: {type: String, required: true, trim: true},
 	description: {type: String, required: true},
 	courseID: {type: String, required: true},
 	author: {type: String, required: true},
@@ -16,3 +17,4 @@ const AnnouncementSchema: Schema = new Schema({
 });
 
 export const Announcement: Model<IAnnouncement> = mongoose.model<IAnnouncement>('Announcement', AnnouncementSchema);
+export const AnnouncementTC = composeWithMongoose(Announcement);
