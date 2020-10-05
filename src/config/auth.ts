@@ -5,7 +5,7 @@ import { IPerson } from '@models/person.model';
 import personService from '@services/person.service';
 import { validateVitalEnv } from '@validate/env.validate';
 
-const DB_SECRET = validateVitalEnv(process.env.DB_SECRET);
+const DB_SECRET = validateVitalEnv('DB_SECRET');
 
 const extractTokenFromCookie = (req: Request) => {
   let token = null;

@@ -1,7 +1,9 @@
-export const validateVitalEnv = (variable: string | undefined): string => {
-  if (variable === undefined) {
-    throw Error('Vital environment variable undefined!');
+export const validateVitalEnv = (varName: string): string => {
+  const envVariable = process.env[varName];
+
+  if (envVariable === undefined) {
+    throw Error(`Vital environment variable '${varName}' undefined!`);
   }
 
-  return variable;
+  return envVariable;
 }

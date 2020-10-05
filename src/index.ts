@@ -19,10 +19,10 @@ dotenv.config();
 require('dotenv-defaults/config');
 
 // CONSTANTS
-const DB_SECRET = validateVitalEnv(process.env.DB_SECRET);
-const DB_URI = validateVitalEnv(process.env.DB_URI);
-const PORT = validateVitalEnv(process.env.API_PORT);
-const BASE_URL = validateVitalEnv(process.env.API_URL_BASE);
+const DB_SECRET = validateVitalEnv('DB_SECRET');
+const DB_URI = validateVitalEnv('DB_URI');
+const PORT = validateVitalEnv('API_PORT');
+const BASE_URL = validateVitalEnv('API_URL_BASE');
 
 // TWILIO
 if (process.env.NODE_ENV === 'PRODUCTION') {
